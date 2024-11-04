@@ -1,0 +1,51 @@
+Step 1: Set Up Your Environment
+
+
+Install .NET SDK: Make sure you have the latest .NET SDK installed. You can download it from the official .NET website.
+
+Install PostgreSQL: If you haven't already, install PostgreSQL. You can find installation instructions for various operating systems on the PostgreSQL download page.
+
+Install pgAdmin (Optional): pgAdmin is a useful tool for managing your PostgreSQL databases. You can download it from the pgAdmin website.
+
+Install Npgsql: Make sure you have the Npgsql and Npgsql.EntityFrameworkCore.PostgreSQL packages in your project, as well as Microsoft.EntityFrameworkCore.Design:
+
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add package Microsoft.EntityFrameworkCore.Design
+
+
+
+Step 2: Create Your Database
+Open PostgreSQL Command Line or pgAdmin: You can create a new database using either the command line or pgAdmin.
+
+Create a Database: You can run the following SQL command to create your database (replace EmployeeDb with your desired database name):
+
+CREATE DATABASE EmployeeDb;
+
+
+
+Step 3: Configure the Application
+Update appsettings.json: In your .NET Core project, open appsettings.json and configure the connection string to point to your PostgreSQL database:
+
+{
+    "ConnectionStrings": {
+        "DefaultConnection": "Host=localhost;Database=EmployeeDb;Username=yourusername;Password=yourpassword"
+    }
+}
+
+
+
+Step 4: Create Migrations and Update the Database
+Open a Terminal: Navigate to your project directory where your .csproj file is located.
+
+Add Migration: Run the following command to create a migration for your Employees table:
+
+dotnet ef migrations add Employees -c EmployeeDbContext
+
+Update the Database: After successfully creating the migration, run the following command to apply the migration and create the table:
+
+dotnet ef database update
+
+
+Step 5: Run the Application
+Run the API: Use the following command to run your application:
+dotnet run
